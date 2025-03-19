@@ -1,10 +1,11 @@
 import React from 'react';
 import { Activity, LineChart, Dumbbell, DollarSign, Trophy, LogOut } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../lib/auth';
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { user, signOut } = useAuth();
 
   const handleSignOut = async () => {
@@ -24,10 +25,30 @@ const Navbar = () => {
           {user ? (
             <>
               <div className="hidden md:flex items-center space-x-8">
-                <NavLink icon={<LineChart className="h-5 w-5" />} text="Analytics" onClick={() => navigate('/dashboard')} />
-                <NavLink icon={<Dumbbell className="h-5 w-5" />} text="Training" onClick={() => navigate('/dashboard')} />
-                <NavLink icon={<DollarSign className="h-5 w-5" />} text="Finance" onClick={() => navigate('/dashboard')} />
-                <NavLink icon={<Trophy className="h-5 w-5" />} text="Career" onClick={() => navigate('/dashboard')} />
+                <NavLink 
+                  icon={<LineChart className="h-5 w-5" />} 
+                  text="Analytics" 
+                  onClick={() => navigate('/analytics')}
+                  active={location.pathname === '/analytics'}
+                />
+                <NavLink 
+                  icon={<Dumbbell className="h-5 w-5" />} 
+                  text="Training" 
+                  onClick={() => navigate('/dashboard')}
+                  active={location.pathname === '/dashboard'}
+                />
+                <NavLink 
+                  icon={<DollarSign className="h-5 w-5" />} 
+                  text="Finance" 
+                  onClick={() => navigate('/dashboard')}
+                  active={false}
+                />
+                <NavLink 
+                  icon={<Trophy className="h-5 w-5" />} 
+                  text="Career" 
+                  onClick={() => navigate('/dashboard')}
+                  active={false}
+                />
               </div>
 
               <button 
@@ -63,13 +84,20 @@ const Navbar = () => {
 const NavLink = ({ 
   icon, 
   text, 
-  onClick 
+  onClick,
+  active
 }: { 
   icon: React.ReactNode; 
   text: string;
   onClick: () => void;
+  active: boolean;
 }) => (
-  <button onClick={onClick} className="flex items-center text-gray-300 hover:text-white">
+  <button 
+    onClick={onClick} 
+    className={`flex items-center ${
+      active ? 'text-blue-500' : 'text-gray-300 hover:text-white'
+    }`}
+  >
     {icon}
     <span className="ml-2">{text}</span>
   </button>

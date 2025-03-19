@@ -9,6 +9,7 @@ import Stats from './components/Stats';
 import AthleteRegistration from './components/AthleteRegistration';
 import Dashboard from './components/Dashboard';
 import SignIn from './components/SignIn';
+import Analytics from './components/Analytics';
 
 // Protected Route component
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -68,6 +69,11 @@ function App() {
           <Route path="/dashboard" element={
             <ProtectedRoute>
               <Dashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="/analytics" element={
+            <ProtectedRoute>
+              <Analytics />
             </ProtectedRoute>
           } />
           <Route path="/" element={
