@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Activity, Shield, Brain, DollarSign, Trophy } from 'lucide-react';
@@ -12,9 +13,8 @@ import SignIn from './components/SignIn';
 import Analytics from './components/Analytics';
 import Training from './components/Training';
 import Finance from './components/Finance';
-import Career from './components/Career'; // ✅ Imported Career component
+import Career from './components/Career';
 
-// Protected Route component
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { user, loading } = useAuth();
 
@@ -74,7 +74,7 @@ function App() {
           <Route path="/analytics" element={<ProtectedRoute><Analytics /></ProtectedRoute>} />
           <Route path="/training" element={<ProtectedRoute><Training /></ProtectedRoute>} />
           <Route path="/finance" element={<ProtectedRoute><Finance /></ProtectedRoute>} />
-          <Route path="/career" element={<ProtectedRoute><Career /></ProtectedRoute>} /> {/* ✅ Added Career route */}
+          <Route path="/career" element={<ProtectedRoute><Career /></ProtectedRoute>} />
           <Route path="/" element={
             <>
               <Hero />

@@ -1,102 +1,75 @@
 import React from 'react';
-import { Activity, LineChart, Dumbbell, DollarSign, Trophy, LogOut } from 'lucide-react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../lib/auth';
+import { Link, useLocation } from 'react-router-dom';
+import { Activity, DollarSign, Brain, Trophy, BarChart2 } from 'lucide-react';
 
 const Navbar = () => {
-  const navigate = useNavigate();
   const location = useLocation();
-  const { user, signOut } = useAuth();
 
-  const handleSignOut = async () => {
-    await signOut();
-    navigate('/');
+  const isActive = (path: string) => {
+    return location.pathname === path ? 'bg-gray-800' : '';
   };
 
   return (
-    <nav className="bg-gray-800 border-b border-gray-700">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex items-center cursor-pointer" onClick={() => navigate('/')}>
-            <Activity className="h-8 w-8 text-blue-500" />
-            <span className="ml-2 text-xl font-bold">TotalFit</span>
-          </div>
-          
-          {user ? (
-            <>
-              <div className="hidden md:flex items-center space-x-8">
-                <NavLink 
-                  icon={<LineChart className="h-5 w-5" />} 
-                  text="Analytics" 
-                  onClick={() => navigate('/analytics')}
-                  active={location.pathname === '/analytics'}
-                />
-                <NavLink 
-                  icon={<Dumbbell className="h-5 w-5" />} 
-                  text="Training" 
-                  onClick={() => navigate('/training')}
-                  active={location.pathname === '/training'}
-                />
-                <NavLink 
-                  icon={<DollarSign className="h-5 w-5" />} 
-                  text="Finance" 
-                  onClick={() => navigate('/finance')}
-                  active={location.pathname === '/finance'}
-                />
-                <NavLink 
-                  icon={<Trophy className="h-5 w-5" />} 
-                  text="Career" 
-                  onClick={() => navigate('/career')}
-                  active={location.pathname === '/career'}
-                />
-              </div>
+    <nav className="bg-gray-900 border-b border-gray-800">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-16">
+          <div className="flex">
+            <Link to="/" className="flex items-center flex-shrink-0 text-white font-bold text-xl">
+              AthleteAI
+            </Link>
 
-              <button 
-                onClick={handleSignOut}
-                className="flex items-center space-x-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg"
+            <div className="hidden md:ml-6 md:flex md:space-x-4">
+              <Link
+                to="/dashboard"
+                className={`${isActive('/dashboard')} text-gray-300 hover:bg-gray-800 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center`}
               >
-                <LogOut className="h-4 w-4" />
-                <span>Sign Out</span>
-              </button>
-            </>
-          ) : (
-            <div className="flex items-center space-x-4">
-              <button 
-                onClick={() => navigate('/signin')}
-                className="text-gray-300 hover:text-white px-4 py-2"
+                <BarChart2 className="w-4 h-4 mr-2" />
+                Dashboard
+              </Link>
+
+              <Link
+                to="/analytics"
+                className={`${isActive('/analytics')} text-gray-300 hover:bg-gray-800 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center`}
               >
-                Sign In
-              </button>
-              <button 
-                onClick={() => navigate('/register')}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg"
+                <Brain className="w-4 h-4 mr-2" />
+                Analytics
+              </Link>
+
+              <Link
+                to="/training"
+                className={`${isActive('/training')} text-gray-300 hover:bg-gray-800 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center`}
               >
-                Get Started
-              </button>
+                <Activity className="w-4 h-4 mr-2" />
+                Training
+              </Link>
+
+              <Link
+                to="/finance"
+                className={`${isActive('/finance')} text-gray-300 hover:bg-gray-800 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center`}
+              >
+                <DollarSign className="w-4 h-4 mr-2" />
+                Finance
+              </Link>
+
+              <Link
+                to="/career"
+                className={`${isActive('/career')} text-gray-300 hover:bg-gray-800 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center`}
+              >
+                <Trophy className="w-4 h-4 mr-2" />
+                Career
+              </Link>
             </div>
-          )}
+          </div>
+
+          <div className="flex items-center">
+            <Link to="/signin" className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700">
+              Sign In
+            </Link>
+          </div>
         </div>
       </div>
     </nav>
   );
 };
 
-const NavLink = ({ 
-  icon, 
-  text, 
-  onClick,
-  active
-}) => (
-  <button 
-    onClick={onClick} 
-    className={`flex items-center ${
-      active ? 'text-blue-500' : 'text-gray-300 hover:text-white'
-    }`}
-  >
-    {icon}
-    <span className="ml-2">{text}</span>
-  </button>
-);
-
 export default Navbar;
-S
