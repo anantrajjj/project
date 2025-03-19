@@ -62,7 +62,7 @@ const Analytics = () => {
       if (athleteData) {
         // Fetch metrics
         const { data: metricsData } = await supabase
-          .from('athlete_metrics')
+          .from('_metrics')
           .select('*')
           .eq('athlete_id', athleteData.id)
           .order('recorded_at', { ascending: true });

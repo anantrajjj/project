@@ -10,21 +10,25 @@ import AthleteRegistration from './components/AthleteRegistration';
 import Dashboard from './components/Dashboard';
 import SignIn from './components/SignIn';
 import Analytics from './components/Analytics';
+import Training from './components/Training';
+import Finance from './components/Finance';
+import Career from './components/Career'; // ✅ Imported Career component
 
 // Protected Route component
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { user, loading } = useAuth();
-  
+
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+      <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-blue-500"></div>
+        <p className="mt-4 text-gray-400">Loading...</p>
       </div>
     );
   }
-  
+
   if (!user) {
-    return <Navigate to="/signin" />;
+    return <Navigate to="/signin" replace />;
   }
 
   return <>{children}</>;
@@ -66,16 +70,11 @@ function App() {
         <Routes>
           <Route path="/signin" element={<SignIn />} />
           <Route path="/register" element={<AthleteRegistration />} />
-          <Route path="/dashboard" element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          } />
-          <Route path="/analytics" element={
-            <ProtectedRoute>
-              <Analytics />
-            </ProtectedRoute>
-          } />
+          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/analytics" element={<ProtectedRoute><Analytics /></ProtectedRoute>} />
+          <Route path="/training" element={<ProtectedRoute><Training /></ProtectedRoute>} />
+          <Route path="/finance" element={<ProtectedRoute><Finance /></ProtectedRoute>} />
+          <Route path="/career" element={<ProtectedRoute><Career /></ProtectedRoute>} /> {/* ✅ Added Career route */}
           <Route path="/" element={
             <>
               <Hero />

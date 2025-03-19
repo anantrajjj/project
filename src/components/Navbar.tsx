@@ -34,20 +34,20 @@ const Navbar = () => {
                 <NavLink 
                   icon={<Dumbbell className="h-5 w-5" />} 
                   text="Training" 
-                  onClick={() => navigate('/dashboard')}
-                  active={location.pathname === '/dashboard'}
+                  onClick={() => navigate('/training')}
+                  active={location.pathname === '/training'}
                 />
                 <NavLink 
                   icon={<DollarSign className="h-5 w-5" />} 
                   text="Finance" 
-                  onClick={() => navigate('/dashboard')}
-                  active={false}
+                  onClick={() => navigate('/finance')}
+                  active={location.pathname === '/finance'}
                 />
                 <NavLink 
                   icon={<Trophy className="h-5 w-5" />} 
                   text="Career" 
-                  onClick={() => navigate('/dashboard')}
-                  active={false}
+                  onClick={() => navigate('/career')}
+                  active={location.pathname === '/career'}
                 />
               </div>
 
@@ -86,11 +86,6 @@ const NavLink = ({
   text, 
   onClick,
   active
-}: { 
-  icon: React.ReactNode; 
-  text: string;
-  onClick: () => void;
-  active: boolean;
 }) => (
   <button 
     onClick={onClick} 
@@ -104,3 +99,4 @@ const NavLink = ({
 );
 
 export default Navbar;
+S
