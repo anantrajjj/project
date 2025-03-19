@@ -19,7 +19,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center cursor-pointer" onClick={() => navigate('/')}>
             <Activity className="h-8 w-8 text-blue-500" />
-            <span className="ml-2 text-xl font-bold">AthleteAI</span>
+            <span className="ml-2 text-xl font-bold">TotalFit</span>
           </div>
           
           {user ? (
